@@ -1,0 +1,48 @@
+3)Create virtualenv
+>virtualenv myenv
+>myenv\Scripts\activate
+
+2)Run python file
+>python app.py
+
+
+Install on this
+>pip3 install flask flask-sqlalchemy
+>pip# install Flask
+>pip3 uninstall virtualenv
+
+pip install db
+
+
+@app.route('/order', methods=['POST'])
+def create_order():
+    data = request.json
+    name = data['name']
+    quantity = data['quantity']
+    price = data['price']
+    new_order = FoodOrder(name=name, quantity=quantity, price=price)
+    db.session.add(new_order)
+    db.session.commit()
+    return jsonify({'message': 'Order created successfully'}), 201
+
+@app.route('/order/<int:id>', methods=['GET'])
+def get_order(id):
+    order = FoodOrder.query.get_or_404(id)
+    return jsonify({'name': order.name, 'quantity': order.quantity, 'price': order.price})
+
+@app.route('/order/<int:id>', methods=['PUT'])
+def update_order(id):
+    order = FoodOrder.query.get_or_404(id)
+    data = request.json
+    order.name = data['name']
+    order.quantity = data['quantity']
+    order.price = data['price']
+    db.session.commit()
+    return jsonify({'message': 'Order updated successfully'})
+
+@app.route('/order/<int:id>', methods=['DELETE'])
+def delete_order(id):
+    order = FoodOrder.query.get_or_404(id)
+    db.session.delete(order)
+    db.session.commit()
+    return jsonify({'message': 'Order deleted successfully'})

@@ -1,0 +1,31 @@
+.mybutton {
+  display: inline-block;
+  padding: 7px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #333;
+  border-radius: 20px;
+  background-color: #000000;
+  color: #ffffff;
+  transition: 0.5s ease;
+}
+
+.mybutton:hover {
+  background-color: #fff;
+  color: #000;
+  border-color: #333;
+}
+
+/* Active (clicked) state */
+.mybutton:active {
+  transform: translateY(1px);
+}
+
+/* Disabled state */
+.mybutton[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
